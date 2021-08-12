@@ -14,9 +14,4 @@ async def project_board_messages(client, message):
         await app.send_message("@Marii_kj", "from: @" + str(message.chat.username))
 
 
-@app.on_message(filters.private)
-async def private_messages(client, message):
-   await app.send_message("@Marii_kj", message.text)
-   await app.send_message("@Marii_kj", "from: @" + message.chat.username)
-
 app.run()
