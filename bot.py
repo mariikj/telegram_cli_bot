@@ -4,8 +4,14 @@ import csv
 
 app = Client("my_account",config_file="config.ini")
 
-channel_lists = []
-
+def get_channel_lists():
+    channel_names = []
+    with open("channel_lists.csv", mode = 'r')as csv_file:
+        csv_reader = csv.reader(csv_file)
+        for line in csv_reader:
+            channel_names.append(line)
+        return channel_names
+            
 
 @app.on_message(filters.channel)
 async def project_board_messages(client, message):
@@ -38,4 +44,5 @@ async def add_channel(client, message):
                 csv_writer = csv.writer(csv_file)
                 csv_writer.writerow([channel_name])
 
+print(get_channel_lists())
 app.run()
