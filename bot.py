@@ -6,6 +6,7 @@ app = Client("my_account",config_file="config.ini")
 
 channel_lists = []
 
+#checking if a channel is already added 
 def channel_exists(channel_name):
 
     with open("channel_lists.csv", mode = 'r')as csv_file:
@@ -16,7 +17,6 @@ def channel_exists(channel_name):
 
     return False  
 
-
 @app.on_message(filters.channel)
 async def project_board_messages(client, message):
     print(message.chat.username)
@@ -24,7 +24,7 @@ async def project_board_messages(client, message):
         await app.send_message("@Marii_kj", message.text)
         await app.send_message("@Marii_kj", "from: @" + str(message.chat.username))
 
-
+#adding new channel with "add_channel 'channel name'" message that i personally should send 
 @app.on_message(filters.me)
 async def add_channel(client, message):
     if message.text.split()[0] == "add_channel":
