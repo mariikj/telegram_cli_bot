@@ -13,5 +13,11 @@ async def project_board_messages(client, message):
         await app.send_message("@Marii_kj", message.text)
         await app.send_message("@Marii_kj", "from: @" + str(message.chat.username))
 
-
+@app.on_message(filters.me)
+async def add_channel(client, message):
+    if message.text.split()[0] == "add_channel":
+        with open("channel_lists.csv", mode='a') as csv_file:
+            csv_writer = csv.writer(csv_file)
+            csv_writer.writerow([message.text.split()[1]])
+            
 app.run()
