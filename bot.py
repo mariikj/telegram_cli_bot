@@ -14,7 +14,7 @@ def channel_exists(channel_name):
         for line in csv_reader:
             if channel_name == line[0]:
                 return True
-    
+    csv_file.close()
     return False  
 
 @app.on_message(filters.channel)
