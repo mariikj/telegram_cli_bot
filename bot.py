@@ -9,14 +9,14 @@ def get_channel_lists():
     with open("channel_lists.csv", mode = 'r')as csv_file:
         csv_reader = csv.reader(csv_file)
         for line in csv_reader:
-            channel_names.append(line)
+            channel_names.append(line[0])
         return channel_names
             
 
 @app.on_message(filters.channel)
 async def project_board_messages(client, message):
     print(message.chat.username)
-    if message.chat.username == 'project_board':
+    if message.chat.username in get_channel_lists():
         await app.send_message("@Marii_kj", message.text)
         await app.send_message("@Marii_kj", "from: @" + str(message.chat.username))
 
@@ -44,5 +44,4 @@ async def add_channel(client, message):
                 csv_writer = csv.writer(csv_file)
                 csv_writer.writerow([channel_name])
 
-print(get_channel_lists())
 app.run()
